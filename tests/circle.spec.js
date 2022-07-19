@@ -23,14 +23,29 @@ const circle = require('../src/circle');
 
 describe('4 - Implemente os casos de teste para a função `circle`', () => {
   it('Verifica se ao receber um raio, a função `circle` retorna um objeto contendo os valores esperados', () => {
-    fail('Teste vazio!');
+    // fail('Teste vazio!');
     // ESCREVA SEUS TESTES ABAIXO:
     // Teste se circle retorna undefined, caso o parâmetro passado não seja um número.
-    // Teste se circle retorna um objeto.
-    // Teste se o objeto retornado possui 3 propriedades.
-    // Teste se a função, quando não recebe nenhum parâmetro, retorna undefined.
-    // Teste se dentro do objeto retornado, a função retorna uma `key` com `value` igual à circunferência correta para um círculo de raio 2.
-    // Teste se dentro do objeto retornado, a função retorna uma `key` com `value` igual à área correta para um círculo de raio 3.
-    // Teste se a função retorna, em um objeto, os dados corretos de um círculo de raio 3.
+    expect(circle('vasco')).toBeUndefined();
+  });
+  test('Teste se circle retorna um objeto.', () => {
+    expect(typeof circle(8)).toEqual('object');
+  });
+  test('Teste se o objeto retornado possui 3 propriedades.', () => {
+    expect(Object.keys(circle(1)).length).toEqual(3);
+  });
+  test('Teste se a função, quando não recebe nenhum parâmetro, retorna undefined.', () => {
+    expect(circle(' ')).toBeUndefined();
+  });
+  test('Teste se dentro do objeto retornado, a função retorna uma `key` com `value` igual à circunferência correta para um círculo de raio 2.', () => {
+    expect(circle(2).circumference).toBeCloseTo(12.56);
+  });
+  test('Teste se dentro do objeto retornado, a função retorna uma `key` com `value` igual à área correta para um círculo de raio 3.', () => {
+    expect(circle(3).area).toBeCloseTo(28.26);
+  });
+  test('Teste se a função retorna, em um objeto, os dados corretos de um círculo de raio 3.', () => {
+    expect(circle(3).radius).toBeCloseTo(3);
+    expect(circle(3).area).toBeCloseTo(28.26);
+    expect(circle(3).circumference).toBeCloseTo(18.84);
   });
 });
