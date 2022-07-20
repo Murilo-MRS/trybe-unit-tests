@@ -104,19 +104,17 @@ const createMenu = (obj) => {
     consumption: [],
   };
   objeto.order = (string) => objeto.consumption.push(string);
-  
-  let menuDePreco = Object.entries(obj.food).concat(Object.entries(obj.drinks));
-  let valor = 0;
-  const teste = (pedido) => {
-    for (let index2 = 0; index2 < menuDePreco.length; index2 += 1) {
-      const element = menuDePreco[index2][0];
-      if (element === pedido) valor += 1.1 * menuDePreco[index2][1];
-    }
-  };
   objeto.pay = () => {
+    let comida = Object.keys(obj.food);
+    let bebida = Object.keys(obj.drinks);
+    let valor = 0;
     for (let index1 = 0; index1 < objeto.consumption.length; index1 += 1) {
-      let pedido = objeto.consumption[index1];
-      teste(pedido);
+      if (comida.includes(objeto.consumption[index1])) {
+        valor += 1.1 * obj.food[objeto.consumption[index1]];
+      }
+      if (bebida.includes(objeto.consumption[index1])) {
+        valor += 1.1 * obj.drinks[objeto.consumption[index1]];
+      }
     }
     return Number(valor.toFixed(2));
   };
