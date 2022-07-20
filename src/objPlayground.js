@@ -34,8 +34,41 @@
   arrayGenerator('entries', { sum: 3, mult: 2, div: 0, sub: -1 }) // [ [ 'sum', 3 ], [ 'mult', 2 ], [ 'div', 0 ], [ 'sub', -1 ] ]
 */
 
-const calculator = (number1, number2) => {};
+const calculator = (number1, number2) => {
+  const obj = {
+    sum: Math.floor(number1 + number2),
+    mult: Math.floor(number1 * number2),
+    div: Math.floor(number1 / number2),
+    sub: Math.floor(number1 - number2),
+  };
+  return obj;
+};
 
-const arrayGenerator = (type, object) => {};
+const switchFunction = (type, object) => {
+  switch (type) {
+    case 'keys':
+      return Object.keys(object);
+      // break;
+    
+    case 'values':
+      return Object.values(object);
+      // break;
+    
+    case 'entries':
+      return Object.entries(object);
+      // break;
+    default:
+      throw new Error('Não é um tipo válido');
+  }
+};
 
+const arrayGenerator = (type, object) => {
+  try {
+    return switchFunction(type, object);
+  } catch (error) {
+    return error.message;
+  }
+};
+console.log(calculator(1, 2));
+console.log(arrayGenerator('entries', { sum: 3, mult: 2, div: 0, sub: -1 }));
 module.exports = { calculator, arrayGenerator };
