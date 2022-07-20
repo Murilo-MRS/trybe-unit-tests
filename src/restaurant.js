@@ -54,7 +54,7 @@
 
 */
 
-// PASSO 1: Crie uma função `createMenu()` que, recebendo um objeto como parâmetro, retorna esse objeto no seguinte formato: 
+// PASSO 1: Crie uma função `createMenu()` que, recebendo um objeto como parâmetro, retorna esse objeto no seguinte formato:
 //  { fetchMenu: () => objetoPassadoPorParametro }.
 //
 // Agora faça o TESTE 4 no arquivo `tests/restaurant.spec.js`.
@@ -67,19 +67,19 @@
 
 //------------------------------------------------------------------------------------------
 
-// PASSO 3: Crie uma função, separada da função `createMenu()`, que, ao receber uma string como parâmetro, 
+// PASSO 3: Crie uma função, separada da função `createMenu()`, que, ao receber uma string como parâmetro,
 // adiciona essa string ao array de `objetoRetornado.consumption`. Essa nova função será adicionada à chave `order`.
-// 
-// DICA PARA DESENVOLVIMENTO: 
+//
+// DICA PARA DESENVOLVIMENTO:
 // - Definir a função `createMenu()`
-// - Definir o objeto que a `createMenu()` retorna, mas separadamente 
+// - Definir o objeto que a `createMenu()` retorna, mas separadamente
 // - E depois, definir essa nova função que será atribuída a `order`.
 // ```
 // const restaurant = {}
 //
 // const createMenu = (myMenu) => // Lógica que edita o objeto `restaurant`
 //
-// const orderFromMenu = (request) => // Lógica que adiciona à chave `consumption` de `restaurant` a string recebida no parâmetro `request`. 
+// const orderFromMenu = (request) => // Lógica que adiciona à chave `consumption` de `restaurant` a string recebida no parâmetro `request`.
 // // Essa função deve ser associada à chave `order` de `restaurant`
 // ```
 // Agora faça o TESTE 6 no arquivo `tests/restaurant.spec.js`.
@@ -93,6 +93,40 @@
 // - retornará o valor somado acrescido de 10%.
 // DICA: para isso, você precisará percorrer tanto o objeto da chave `food` quanto o objeto da chave `drink`.
 
-const createMenu = () => {};
+// const meuRestaurante = {
+//   food: { coxinha: 3.9, sanduiche: 9.9 },
+//   drinks: { agua: 3.9, cerveja: 6.9 },
+// };
 
+const createMenu = (obj) => {
+  let objeto = {
+    fetchMenu: () => obj,
+    consumption: [],
+  };
+  objeto.order = (string) => objeto.consumption.push(string);
+  
+  let menuDePreco = Object.entries(obj.food).concat(Object.entries(obj.drinks));
+  let valor = 0;
+  const teste = (pedido) => {
+    for (let index2 = 0; index2 < menuDePreco.length; index2 += 1) {
+      const element = menuDePreco[index2][0];
+      if (element === pedido) valor += 1.1 * menuDePreco[index2][1];
+    }
+  };
+  objeto.pay = () => {
+    for (let index1 = 0; index1 < objeto.consumption.length; index1 += 1) {
+      let pedido = objeto.consumption[index1];
+      teste(pedido);
+    }
+    return Number(valor.toFixed(2));
+  };
+  return objeto;
+};
+// console.log(createMenu(meuRestaurante).pay());
 module.exports = createMenu;
+
+// for (let index = 0; index < objeto.consumption.length; index += 1) {
+//   if (menuDePreco.includes(objeto.consumption[index])) {
+//     valor += 1.1 * (menuDePreco[index][1]);
+//   }
+// }
